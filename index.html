@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Validar Documento - SE Cali</title>
+
+  <style>
+    :root{
+      --blue:#1f4f79;
+      --bg:#f3f5f7;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --success:#10b981;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .topbar{
+      background:var(--blue);
+      color:#fff;
+      height:46px;
+      display:flex;
+      align-items:center;
+      padding:0 18px;
+      font-size:14px;
+    }
+    .topbar .title{
+      font-weight:700;
+      text-transform:uppercase;
+    }
+    .topbar .spacer{ flex:1; }
+    .topbar .date{ font-weight:700; min-width:110px; text-align:right; }
+
+    .wrap{
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+      padding: 28px 32px 36px;
+    }
+
+    .intro{
+      font-size:14px;
+      color:#1f2937;
+      margin-bottom: 26px;
+      max-width: 720px;
+      line-height:1.5;
+    }
+
+    .form{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap:18px 26px;
+      max-width: 520px;
+      margin-top: 10px;
+    }
+
+    label{
+      font-size:13px;
+      font-weight:700;
+      color:#374151;
+      align-self:center;
+    }
+
+    .req{ color:#dc2626; }
+
+    input{
+      padding: 10px 12px;
+      font-size:14px;
+      border:1px solid var(--line);
+      background:#fafafa;
+    }
+
+    input:focus{
+      outline:none;
+      border-color:#93c5fd;
+      background:#fff;
+    }
+
+    .note{
+      grid-column: 1 / -1;
+      font-size:13px;
+      color:#dc2626;
+      margin-top: 6px;
+    }
+
+    .actions{
+      margin-top: 30px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .btn{
+      border:0;
+      padding: 10px 22px;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .btn-success{
+      background: var(--success);
+      color:#fff;
+    }
+
+    .btn-secondary{
+      background:#e5e7eb;
+      color:#111827;
+    }
+
+    .btn:hover{ opacity:.9; }
+
+    @media(max-width:640px){
+      .form{
+        grid-template-columns: 1fr;
+      }
+      label{
+        margin-bottom:-10px;
+      }
+      .topbar .date{ min-width:auto; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="title">VALIDAR DOCUMENTO - SE CALI</div>
+    <div class="spacer"></div>
+
+    <!-- ✅ FECHA AUTOMÁTICA: no queda estática -->
+    <div class="date" id="fechaHoy">--/--/----</div>
+  </div>
+
+  <div class="wrap">
+    <div class="card">
+
+      <p class="intro">
+        Para validar la autenticidad del documento de legalización por favor
+        ingrese el número de radicado y el código de verificación que se
+        encuentran en el certificado expedido por la Secretaría de Educación.
+      </p>
+
+      <form class="form" onsubmit="return validar()">
+        <label for="radicado">RADICADO <span class="req">*</span></label>
+        <input id="radicado" required>
+
+        <label for="codigo">CÓDIGO <span class="req">*</span></label>
+        <input id="codigo" required>
+
+        <div class="note">* Campos obligatorios</div>
+
+        <div class="actions">
+          <button class="btn btn-success" type="submit">✔ Aceptar</button>
+          <button class="btn btn-secondary" type="button" onclick="volver()">← Volver</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    // ✅ PONER FECHA HOY (DD/MM/AAAA) - robusto
+    function ponerFechaHoy() {
+      const el = document.getElementById("fechaHoy");
+      if (!el) return;
+
+      const hoy = new Date();
+      const dia = String(hoy.getDate()).padStart(2, "0");
+      const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+      const anio = hoy.getFullYear();
+      el.textContent = `${dia}/${mes}/${anio}`;
+    }
+
+    // Ejecuta al cargar
+    ponerFechaHoy();
+
+    function validar(){
+      const rad = document.getElementById("radicado").value.trim().toUpperCase();
+      const cod = document.getElementById("codigo").value.trim().toUpperCase();
+
+      if(!rad || !cod){
+        alert("Debe ingresar el radicado y el código de verificación.");
+        return false;
+      }
+
+      // ✅ VALIDACIÓN DOBLE (radicado + código)
+
+      // DIPLOMA DE GRADO
+      if (rad === "CAL2025LR000354" && cod === "RF4HT3") {
+        window.location.href =
+          "consulta-legalizacion-diploma.html?radicado=" + encodeURIComponent(rad);
+        return false;
+      }
+
+      // ACTA DE GRADO
+      if (rad === "CAL2025LR000356" && cod === "TGQD5B") {
+        window.location.href =
+          "consulta-legalizacion-acta.html?radicado=" + encodeURIComponent(rad);
+        return false;
+      }
+
+      // Si no coincide
+      alert(
+        "Información inválida.\n\n" +
+        "El radicado y el código no coinciden con ningún documento.\n" +
+        "Verifique e intente nuevamente."
+      );
+      return false;
+    }
+
+    function volver(){
+      history.back();
+    }
+  </script>
+
+</body>
+</html>
+
