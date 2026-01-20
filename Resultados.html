@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apostilla / Legalización - Resultados</title>
+
+  <style>
+    :root{
+      --container:1180px;
+      --primary:#2f69c9;
+      --text:#0b255a;
+      --line:#d1d5db;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:#fff;
+      color:#0f172a;
+    }
+    a{color:#0b5bd3;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Header */
+    .top-header{
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      box-shadow:0 4px 14px rgba(15,23,42,.06);
+    }
+    .top-header .inner{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:10px 18px;
+      display:grid;
+      grid-template-columns:auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+    .brand img{width:95px;height:auto;display:block}
+    .page-title{
+      text-align:center;
+      font-size:26px;
+      font-weight:600;
+      color:var(--text);
+    }
+
+    /* Main */
+    .main{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:14px 18px 0;
+    }
+
+    .lang-bar{
+      background:var(--primary);
+      color:#fff;
+      border-radius:4px;
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .lang-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      font-size:18px;
+    }
+    .lang-left .icon{
+      width:18px;height:18px;
+      border:2px solid #fff;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+    }
+    .lang-left .sep{padding:0 10px;opacity:.85}
+    .lang-switch{margin-left:auto;display:flex;gap:10px}
+    .lang-switch button{
+      background:transparent;border:0;color:#fff;
+      font-size:18px;font-weight:800;
+      padding:6px 10px;border-radius:6px;
+      opacity:.9;cursor:pointer;
+    }
+    .lang-switch button[aria-pressed="true"]{
+      background:rgba(255,255,255,.18);opacity:1
+    }
+
+    h1{
+      margin:18px 0 0;
+      font-size:30px;
+      font-weight:400;
+      color:var(--text);
+    }
+    .divider{
+      height:1px;background:#cbd5e1;margin:10px 0 12px;
+    }
+
+    .result-info{
+      border:1px solid var(--line);
+      border-radius:6px;
+      padding:10px 12px;
+      display:flex;
+      gap:10px;
+      font-size:13px;
+      color:#0b3a8a;
+    }
+    .result-info .i{
+      width:18px;height:18px;
+      border-radius:50%;
+      border:2px solid #0b5bd3;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:900;color:#0b5bd3;
+      font-size:12px;
+    }
+
+    /* Visores */
+    .viewer-block{margin-top:14px;text-align:center}
+    .viewer-title{
+      font-size:12px;
+      font-weight:700;
+      margin:8px 0;
+      color:#334155;
+    }
+    .viewer{
+      border:1px solid var(--line);
+      border-radius:6px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .viewer iframe{
+      width:100%;
+      height:420px;
+      border:0;
+      display:block;
+    }
+    .doc-actions{
+      margin-top:8px;
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:#0b5bd3;color:#fff;
+      border:0;border-radius:12px;
+      padding:10px 18px;
+      font-size:14px;font-weight:800;
+      cursor:pointer;
+      box-shadow:0 10px 18px rgba(11,91,211,.18);
+      display:inline-flex;align-items:center;justify-content:center;
+    }
+    .btn-secondary{
+      background:#fff;color:#0b5bd3;
+      border:1px solid #0b5bd3;
+      box-shadow:none;
+    }
+
+    .bottom-actions{margin:18px 0 8px}
+    .footer-image img{
+      width:100%;max-width:550px;
+      margin:0 auto;display:block;
+    }
+
+    @media(max-width:900px){
+      .top-header .inner{grid-template-columns:1fr;justify-items:center}
+      h1{font-size:24px}
+      .viewer iframe{height:360px}
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="top-header">
+  <div class="inner">
+    <div class="brand">
+      <img src="logo-cancilleria.png" alt="Cancillería">
+    </div>
+    <div class="page-title">Apostilla / Legalización</div>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="lang-bar">
+    <div class="lang-left">
+      <span class="icon">✓</span>
+      <span>Español</span>
+      <span class="sep">/</span>
+      <span>English</span>
+    </div>
+    <div class="lang-switch">
+      <button aria-pressed="true">Español</button>
+      <span>/</span>
+      <button aria-pressed="false">English</button>
+    </div>
+  </section>
+
+  <h1>Verificación de Apostilla o Legalización</h1>
+  <div class="divider"></div>
+
+  <div class="result-info">
+    <div class="i">i</div>
+    <div>
+      <strong id="tipoSpan">—</strong>
+      <span id="numSpan">—</span>,
+      fecha de expedición:
+      <span id="dateSpan">—</span>.
+    </div>
+  </div>
+
+  <div id="cajones"></div>
+
+  <div class="bottom-actions">
+    <a class="btn" href="index.html">Nueva consulta</a>
+  </div>
+
+</main>
+
+<footer class="footer-image">
+  <img src="footer-cancilleria.png" alt="Pie de página Ministerio de Relaciones Exteriores">
+</footer>
+
+<script>
+  const CASOS = {
+    "L2OIV133145887": {
+      fecha:"2026-07-01",
+      tipo:"Legalización",
+      docs:[
+        {t:"Legalización",f:"docs/L2OIV133145887 Legalizacion Diploma.pdf"},
+        {t:"Documento",f:"docs/L2OIV133145887 Diploma.pdf"}
+      ]
+    },
+    "L2OIV133145895": {
+      fecha:"2026-07-01",
+      tipo:"Legalización",
+      docs:[
+        {t:"Legalización",f:"docs/L2OIV133145895 Legalizacion Acta de Grado.pdf"},
+        {t:"Acta de grado",f:"docs/L2OIV133145895 Acta de grado.pdf"}
+      ]
+    },
+    "A2ZCM1420287305": {
+      fecha:"2026-01-19",
+      tipo:"Apostilla",
+      docs:[
+        {t:"Apostilla",f:"docs/A2ZCM1420287305 Apostilla Diploma.pdf"},
+        {t:"Legalización",f:"docs/A2ZCM1420287305 Legalizacion Diploma.pdf"},
+        {t:"Diploma",f:"docs/A2ZCM1420287305 Diploma.pdf"}
+      ]
+    },
+    "A2ZCM1420287418": {
+      fecha:"2026-01-19",
+      tipo:"Apostilla",
+      docs:[
+        {t:"Apostilla",f:"docs/A2ZCM1420287418 Apostilla Acta.pdf"},
+        {t:"Legalización",f:"docs/A2ZCM1420287418 Legalizacion Acta de Grado.pdf"},
+        {t:"Acta de grado",f:"docs/A2ZCM1420287418 Acta de grado.pdf"}
+      ]
+    }
+  };
+
+  const params=new URLSearchParams(location.search);
+  const codigo=(params.get("codigo")||"").toUpperCase();
+  const caso=CASOS[codigo];
+  if(!caso){location.href="index.html";}
+
+  document.getElementById("tipoSpan").textContent=caso.tipo;
+  document.getElementById("numSpan").textContent=codigo;
+  document.getElementById("dateSpan").textContent=caso.fecha;
+
+  const cont=document.getElementById("cajones");
+  cont.innerHTML=caso.docs.map(d=>{
+    const u=encodeURI(d.f);
+    return `
+      <div class="viewer-block">
+        <div class="viewer-title">${d.t}</div>
+        <div class="viewer">
+          <iframe src="${u}#view=FitH"></iframe>
+        </div>
+        <div class="doc-actions">
+          <a class="btn btn-secondary" href="${u}" target="_blank">Abrir</a>
+          <a class="btn" href="${u}" download>Descargar</a>
+        </div>
+      </div>`;
+  }).join("");
+</script>
+
+</body>
+</html>

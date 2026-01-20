@@ -3,234 +3,434 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Validar Documento - SE Cali</title>
+  <title>Apostilla / Legalización - Verificación</title>
 
   <style>
     :root{
-      --blue:#1f4f79;
-      --bg:#f3f5f7;
-      --card:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --success:#10b981;
-      font-family: Arial, Helvetica, sans-serif;
+      --container: 1180px;
+      --primary: #2f69c9;
+      --text: #0b255a;
+      --line: #d1d5db;
     }
+
+    *{ box-sizing: border-box; }
 
     body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #ffffff;
+      color: #0f172a;
     }
 
-    .topbar{
-      background:var(--blue);
-      color:#fff;
-      height:46px;
-      display:flex;
-      align-items:center;
-      padding:0 18px;
-      font-size:14px;
-    }
-    .topbar .title{
-      font-weight:700;
-      text-transform:uppercase;
-    }
-    .topbar .spacer{ flex:1; }
-    .topbar .date{ font-weight:700; min-width:110px; text-align:right; }
+    a{ color:#0b5bd3; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
 
-    .wrap{
-      max-width: 960px;
+    /* ===== HEADER ===== */
+    .top-header{
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(15,23,42,.06);
+    }
+
+    .top-header .inner{
+      max-width: var(--container);
       margin: 0 auto;
-      padding: 28px 18px;
+      padding: 10px 18px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 20px;
     }
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-      padding: 28px 32px 36px;
+    .brand img{
+      width: 95px; /* 🔒 tamaño final */
+      height: auto;
+      display: block;
     }
 
-    .intro{
-      font-size:14px;
-      color:#1f2937;
-      margin-bottom: 26px;
-      max-width: 720px;
-      line-height:1.5;
+    .page-title{
+      text-align: center;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
     }
 
-    .form{
-      display:grid;
-      grid-template-columns: 180px 1fr;
-      gap:18px 26px;
-      max-width: 520px;
-      margin-top: 10px;
+    /* ===== MAIN ===== */
+    .main{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 14px 18px 0;
+    }
+
+    .lang-bar{
+      background: var(--primary);
+      color: #fff;
+      border-radius: 4px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-left{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .lang-left .icon{
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,.85);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .lang-left .sep{
+      padding: 0 10px;
+      opacity: .85;
+    }
+
+    .lang-switch{
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lang-switch button{
+      background: transparent;
+      border: 0;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      opacity: .9;
+    }
+
+    .lang-switch button[aria-pressed="true"]{
+      background: rgba(255,255,255,.18);
+      opacity: 1;
+    }
+
+    .h1-row{
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    h1{
+      margin: 0;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .required-note{
+      font-size: 14px;
+      color: #b91c1c;
+      white-space: nowrap;
+    }
+
+    .divider{
+      height: 1px;
+      background: #cbd5e1;
+      margin: 10px 0 18px;
+    }
+
+    .info-card{
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .info-icon{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 4px solid #0b5bd3;
+      color: #0b5bd3;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .info-text{
+      font-size: 16px;
+      line-height: 1.45;
+      color: #0b3a8a;
+    }
+
+    .form-wrap{ margin-top: 22px; }
+
+    .form-grid{
+      display: grid;
+      grid-template-columns: 1.3fr .8fr .6fr;
+      gap: 18px;
+      align-items: end;
     }
 
     label{
-      font-size:13px;
-      font-weight:700;
-      color:#374151;
-      align-self:center;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: var(--text);
     }
 
-    .req{ color:#dc2626; }
+    .req{ color: #b91c1c; font-weight: 800; }
 
     input{
-      padding: 10px 12px;
-      font-size:14px;
-      border:1px solid var(--line);
-      background:#fafafa;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 16px;
+      background: #eaf3ff;
     }
 
-    input:focus{
-      outline:none;
-      border-color:#93c5fd;
-      background:#fff;
+    .date-hint{
+      font-size: 16px;
+      padding-bottom: 10px;
     }
 
-    .note{
-      grid-column: 1 / -1;
-      font-size:13px;
-      color:#dc2626;
-      margin-top: 6px;
-    }
-
-    .actions{
-      margin-top: 30px;
-      display:flex;
-      gap:14px;
-      align-items:center;
+    .line-hr{
+      height: 1px;
+      background: var(--line);
+      margin: 20px 0;
     }
 
     .btn{
-      border:0;
-      padding: 10px 22px;
-      font-size:14px;
-      font-weight:700;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
+      background: #0b5bd3;
+      color: #fff;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 22px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(11,91,211,.22);
     }
 
-    .btn-success{
-      background: var(--success);
-      color:#fff;
+    #msg{
+      margin-top: 12px;
+      font-weight: 700;
+      color: #b91c1c;
     }
 
-    .btn-secondary{
-      background:#e5e7eb;
-      color:#111827;
+    .footer-image{
+      margin-top: 30px;
+      background: #ffffff;
+    }
+    .footer-image img{
+      width: 100%;
+      max-width: 550px;
+      margin: 0 auto;
+      display: block;
     }
 
-    .btn:hover{ opacity:.9; }
-
-    @media(max-width:640px){
-      .form{
+    @media (max-width: 900px){
+      .top-header .inner{
         grid-template-columns: 1fr;
+        justify-items: center;
       }
-      label{
-        margin-bottom:-10px;
-      }
-      .topbar .date{ min-width:auto; }
+      .page-title{ font-size: 24px; }
+      h1{ font-size: 24px; }
+      .form-grid{ grid-template-columns: 1fr; }
+      .lang-bar{ flex-direction: column; }
+      .lang-switch{ margin-left: 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    <div class="title">VALIDAR DOCUMENTO - SE CALI</div>
-    <div class="spacer"></div>
-
-    <!-- ✅ FECHA AUTOMÁTICA: no queda estática -->
-    <div class="date" id="fechaHoy">--/--/----</div>
-  </div>
-
-  <div class="wrap">
-    <div class="card">
-
-      <p class="intro">
-        Para validar la autenticidad del documento de legalización por favor
-        ingrese el número de radicado y el código de verificación que se
-        encuentran en el certificado expedido por la Secretaría de Educación.
-      </p>
-
-      <form class="form" onsubmit="return validar()">
-        <label for="radicado">RADICADO <span class="req">*</span></label>
-        <input id="radicado" required>
-
-        <label for="codigo">CÓDIGO <span class="req">*</span></label>
-        <input id="codigo" required>
-
-        <div class="note">* Campos obligatorios</div>
-
-        <div class="actions">
-          <button class="btn btn-success" type="submit">✔ Aceptar</button>
-          <button class="btn btn-secondary" type="button" onclick="volver()">← Volver</button>
-        </div>
-      </form>
-
+<header class="top-header">
+  <div class="inner">
+    <div class="brand">
+      <img src="logo-cancilleria.png" alt="Cancillería">
     </div>
+    <div class="page-title">Apostilla / Legalización</div>
+  </div>
+</header>
+
+<main class="main">
+
+  <section class="lang-bar">
+    <div class="lang-left">
+      <span class="icon">✓</span>
+      <span>Español</span>
+      <span class="sep">/</span>
+      <span>English</span>
+    </div>
+
+    <div class="lang-switch">
+      <button aria-pressed="true" type="button">Español</button>
+      <span>/</span>
+      <button aria-pressed="false" type="button">English</button>
+    </div>
+  </section>
+
+  <div class="h1-row">
+    <h1>Verificación de Apostilla o Legalización</h1>
+    <div class="required-note"><span class="req">*</span> Campos obligatorios</div>
   </div>
 
-  <script>
-    // ✅ PONER FECHA HOY (DD/MM/AAAA) - robusto
-    function ponerFechaHoy() {
-      const el = document.getElementById("fechaHoy");
-      if (!el) return;
+  <div class="divider"></div>
 
-      const hoy = new Date();
-      const dia = String(hoy.getDate()).padStart(2, "0");
-      const mes = String(hoy.getMonth() + 1).padStart(2, "0");
-      const anio = hoy.getFullYear();
-      el.textContent = `${dia}/${mes}/${anio}`;
+  <section class="info-card">
+    <div class="info-icon">i</div>
+    <div class="info-text">
+      <p style="margin:0 0 8px 0;">
+        Si tiene alguna duda o inconveniente para consultar su documento comuníquese al Centro de atención al ciudadano - CIAC a través del siguiente enlace:
+        <a href="https://tramites.cancilleria.gov.co/ciudadano/pqr/BuzonVirtual.aspx" target="_blank" rel="noopener noreferrer">
+          https://tramites.cancilleria.gov.co/ciudadano/pqr/BuzonVirtual.aspx
+        </a>
+      </p>
+      <p style="margin:0;">
+        Si la Apostilla fue expedida a partir de 08 de septiembre de 2007 o la Legalización fue expedida a partir de 29 de diciembre de 2011 ingrese la fecha de expedición de la apostilla o legalización.
+      </p>
+    </div>
+  </section>
+
+  <section class="form-wrap">
+    <form id="formConsulta">
+      <div class="form-grid">
+        <div>
+          <label>Número de Apostilla-Legalización-Constancia <span class="req">*</span></label>
+          <input type="text" id="numero" autocomplete="off">
+        </div>
+
+        <div>
+          <label>Fecha de expedición</label>
+          <!-- ✅ AHORA SE ESCRIBE EN MES/DÍA/AÑO -->
+          <input
+            type="text"
+            id="fecha"
+            inputmode="numeric"
+            placeholder="mes/día/año"
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="date-hint">mes/día/año</div>
+      </div>
+
+      <div class="line-hr"></div>
+
+      <button class="btn" type="submit">Buscar</button>
+      <div id="msg"></div>
+    </form>
+  </section>
+
+</main>
+
+<footer class="footer-image">
+  <img src="footer-cancilleria.png" alt="Pie de página Ministerio de Relaciones Exteriores">
+</footer>
+
+<script>
+  // ✅ FECHA EN FORMATO MES/DÍA/AÑO
+  const CASOS = {
+    "L2OIV133145887": { fecha: "1/7/2026" },
+    "L2OIV133145895": { fecha: "1/7/2026" },
+    "A2ZCM1420287305": { fecha: "1/19/2026" },
+    "A2ZCM1420287418": { fecha: "1/19/2026" }
+  };
+
+  const form = document.getElementById("formConsulta");
+  const msg  = document.getElementById("msg");
+
+  function norm(v){
+    return (v || "").trim().toUpperCase();
+  }
+
+  // Normaliza fecha escrita por el usuario (quita espacios, permite 01/07/2026 -> 1/7/2026)
+  function normalizarMDY(s){
+    s = (s || "").trim().replace(/\s+/g, "");
+    const m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if(!m) return null;
+
+    const mes = Number(m[1]);
+    const dia = Number(m[2]);
+    const anio = Number(m[3]);
+
+    if(anio < 1900 || anio > 2100) return null;
+    if(mes < 1 || mes > 12) return null;
+
+    const maxDia = new Date(anio, mes, 0).getDate(); // día 0 del mes siguiente
+    if(dia < 1 || dia > maxDia) return null;
+
+    return `${mes}/${dia}/${anio}`; // sin ceros a la izquierda
+  }
+
+  // (Opcional) ayuda al usuario: auto agrega "/" mientras escribe
+  const fechaInput = document.getElementById("fecha");
+  fechaInput.addEventListener("input", () => {
+    let v = fechaInput.value.replace(/[^\d]/g, ""); // solo números
+    if(v.length > 8) v = v.slice(0,8); // MMDDYYYY sin separadores
+    // armamos M/D/YYYY sin forzar ceros
+    // ejemplo: 1192026 -> 1/19/2026
+    // como es variable, solo ayudamos con barras en posiciones típicas:
+    // si el usuario va poniendo: M M D D Y Y Y Y
+    // se muestra: MM/DD/YYYY
+    let out = v;
+    if(v.length >= 3) out = v.slice(0,2) + "/" + v.slice(2);
+    if(v.length >= 5) out = v.slice(0,2) + "/" + v.slice(2,4) + "/" + v.slice(4);
+    fechaInput.value = out;
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    msg.textContent = "";
+
+    const codigo = norm(document.getElementById("numero").value);
+    const fechaRaw = document.getElementById("fecha").value;
+
+    if(!codigo){
+      msg.textContent = "Por favor ingrese el número.";
+      return;
     }
 
-    // Ejecuta al cargar
-    ponerFechaHoy();
-
-    function validar(){
-      const rad = document.getElementById("radicado").value.trim().toUpperCase();
-      const cod = document.getElementById("codigo").value.trim().toUpperCase();
-
-      if(!rad || !cod){
-        alert("Debe ingresar el radicado y el código de verificación.");
-        return false;
-      }
-
-      // ✅ VALIDACIÓN DOBLE (radicado + código)
-
-      // DIPLOMA DE GRADO
-      if (rad === "CAL2025LR000354" && cod === "RF4HT3") {
-        window.location.href =
-          "consulta-legalizacion-diploma.html?radicado=" + encodeURIComponent(rad);
-        return false;
-      }
-
-      // ACTA DE GRADO
-      if (rad === "CAL2025LR000356" && cod === "TGQD5B") {
-        window.location.href =
-          "consulta-legalizacion-acta.html?radicado=" + encodeURIComponent(rad);
-        return false;
-      }
-
-      // Si no coincide
-      alert(
-        "Información inválida.\n\n" +
-        "El radicado y el código no coinciden con ningún documento.\n" +
-        "Verifique e intente nuevamente."
-      );
-      return false;
+    const caso = CASOS[codigo];
+    if(!caso){
+      msg.textContent = "No se encontró información asociada al número ingresado.";
+      return;
     }
 
-    function volver(){
-      history.back();
+    if(!fechaRaw.trim()){
+      msg.textContent = "Para este número es obligatorio ingresar la fecha de expedición.";
+      return;
     }
-  </script>
+
+    const fechaMDY = normalizarMDY(fechaRaw);
+    if(!fechaMDY){
+      msg.textContent = "Formato de fecha inválido. Use mes/día/año (ej: 1/19/2026).";
+      return;
+    }
+
+    if(fechaMDY !== caso.fecha){
+      msg.textContent = "La fecha no coincide con el registro.";
+      return;
+    }
+
+    window.location.href = "resultados.html?codigo=" + encodeURIComponent(codigo);
+  });
+</script>
 
 </body>
 </html>
-
